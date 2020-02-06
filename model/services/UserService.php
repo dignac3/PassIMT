@@ -1,16 +1,13 @@
 <?php
 
-include dirname(__FILE__).'/../connection.php';
-
 class UserService
 {
-    private $mysqli;
+    protected $mysqli;
 
-    public function __construct()
+    public function __construct($mysqli)
     {
-        $this->mysqli = getConnection();
+        $this->mysqli = $mysqli;
     }
-
 
     public function getUsers()
     {
