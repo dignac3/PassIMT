@@ -1,3 +1,0 @@
-function doSecureRegister() {
-    alert("Submit");
-}
