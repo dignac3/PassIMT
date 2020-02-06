@@ -18,8 +18,7 @@ class IndexController
     public function getIndex()
     {
 
-
-        $template = $this->templater->load("index.html");
+        $template = $this->templater->load("login.html");
 
         return $template->render();
 
