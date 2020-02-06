@@ -15,16 +15,16 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Gestionnaire de Mots de Passes de l'IMT</a>
+            <a class="navbar-brand" href="/index">Gestionnaire de Mots de Passes de l'IMT</a>
         </div>
         <ul class="nav navbar-nav">
             {% block menu_list %}
-            <li class="active"><a href="#">Accueil</a></li>
+            <li class="active"><a href="/index">Accueil</a></li>
             {% endblock %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'enregistrer</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+            <li><a href="/register"><span class="glyphicon glyphicon-user"></span> S'enregistrer</a></li>
+            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
         </ul>
     </div>
 </nav>
@@ -36,4 +36,6 @@
 {% block footer %}{% endblock %}
 </body>
 </html>
+
+<script src="../js/encrypt.js"></script>
 {% endblock %}

@@ -18,18 +18,25 @@ class IndexController
     public function getIndex()
     {
 
+        $template = $this->templater->load("index.html");
+
+        return $template->render();
+    }
+
+    public function getLogin()
+    {
+
         $template = $this->templater->load("login.html");
 
         return $template->render();
+    }
 
-//        //$template = $this->twig->load("index.html");
-//
-//        //return $template->render();
-//
-//        return <<<HTML
-//<h1>LOL</h1>
-//HTML;
+    public function getRegister()
+    {
 
+        $template = $this->templater->load("register.html");
+
+        return $template->render();
     }
 }
 

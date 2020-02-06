@@ -7,34 +7,40 @@
 {% block content %}
 
     <div class="row" >
-        <h2> Connexion</h2>
+        <h2 class="col-sm-2 col-sm-offset-5">Connexion</h2>
     </div>
-    <form>
-        <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox"> Remember me</label>
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <form action="/login" id="login_form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="i_email">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Mot de Passe:</label>
+                    <input type="password" class="form-control" id="i_pwd">
+                </div>
+                <button type="submit" class="btn btn-default">Se Connecter</button>
+            </form>
+
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 
-<script>
-    function encode(){
-        aes4js.encrypt(key.value, plain.value ).then(x=>  output.value=JSON.stringify(x)  );
-    }
-    function decode(){
-        aes4js.decrypt(key.value, cipher.value ).then(x=>  output.value=x  );
-    }
+        <script>
+            function encode(){
+                aes4js.encrypt(key.value, plain.value ).then(x=>  output.value=JSON.stringify(x)  );
+            }
+            function decode(){
+                aes4js.decrypt(key.value, cipher.value ).then(x=>  output.value=x  );
+            }
 
-    aes4js.encrypt("123", "hello world") // encrypt with password 123
-        .then(aes4js.decrypt.bind(this, "123")) // decrypt
-        .then(alert);
-</script>
+            aes4js.encrypt("123", "hello world") // encrypt with password 123
+                .then(aes4js.decrypt.bind(this, "123")) // decrypt
+                .then(alert);
+        </script>
+    </div>
+
 
 {% endblock %}

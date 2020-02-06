@@ -23,11 +23,41 @@ $router->get('/', function (){
 
 });
 
-$router->get('/profile', function($request) {
+$router->get('/index', function (){
+    global $indexController;
 
-  return <<<HTML
-  <h1>Profile</h1>
-HTML;
+    return $indexController->getIndex();
+
 });
+
+$router->get('/register',function ($request){
+    global $indexController;
+
+    return $indexController->getRegister();
+
+
+});
+
+$router->get('/login',function (){
+    global $indexController;
+
+    return $indexController->getLogin();
+
+
+});
+
+$router->post('/login',function ($request){
+    global $indexController;
+
+
+});
+
+$router->post('/register',function ($request){
+    global $indexController;
+
+
+});
+
+
 
 ?>
