@@ -11,7 +11,6 @@ require_once 'vendor/autoload.php';
 $loader = new FilesystemLoader('template');
 $templater = new Environment($loader,[]);
 
-
 $indexController = new IndexController($templater);
 
 $router = new Router(new Request);
