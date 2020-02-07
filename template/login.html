@@ -6,6 +6,12 @@
 {% endblock %}
 {% block content %}
 
+{% if created == true %}
+    <p> account succesfuly created </p>
+{% else %}
+    <p> error in creation </p>
+{% endif %}
+
     <div class="row" >
         <h2 class="col-sm-2 col-sm-offset-5">Connexion</h2>
     </div>
@@ -21,8 +27,13 @@
                     <label for="i_pwd">Mot de Passe:</label>
                     <input type="password" class="form-control" id="i_pwd">
                 </div>
-                <button type="submit" class="btn btn-default" onclick="connection()">Se Connecter</button>
+                <button type="submit" class="btn btn-default">Se Connecter</button>
             </form>
+
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
     </div>
 
 

@@ -30,13 +30,18 @@ $router->get('/index', function (){
 
 });
 
-$router->get('/register',function ($request){
+$router->get('/register',function (){
     global $indexController;
 
     return $indexController->getRegister();
-
-
 });
+
+$router->post('/register',function ($request){
+    global $indexController;
+
+    return $indexController->postRegister($request->getBody());
+});
+
 
 $router->get('/login',function (){
     global $indexController;
@@ -49,15 +54,6 @@ $router->get('/login',function (){
 $router->post('/login',function ($request){
     global $indexController;
 
-
 });
-
-$router->post('/register',function ($request){
-    global $indexController;
-
-
-});
-
-
 
 ?>

@@ -46,17 +46,17 @@ class IndexController
 
     public function postRegister($request)
     {
-        echo json_encode($request);
+        $userService = new UserService($this->mysqli);
+        $created = $userService->register($request['i_email'], $request['i_pwd']);
 
-        echo "test";
+        if ($created) {
+            $template = $this->templater->load("login.html");
+            return $template->render(['created' => $created]);
+        } else {
+            $template = $this->templater->load("register.html");
+            return $template->render(['error' => true]);
+        }
 
-        /* $passwordService = new PasswordService($this->mysqli);
-      $data = $passwordService->createPassword(1, 'Github', 'Guitoons', '16');
-      echo $data; */
-
-        //$template = $this->templater->load("login.html");
-
-        //return $template->render();
     }
 
 }

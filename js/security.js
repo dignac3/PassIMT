@@ -151,6 +151,7 @@ function register() {
 
     hashed.then((x) => {
         i_pwd.value = x;
+        document.getElementById("register_form").submit();
     });
 
 
