@@ -100,13 +100,14 @@ function generateHashSaltedPassword(pwd) {
 }
 
 function encodePassword(key, password) {
-
-    aes4js.encrypt(key, password) // encrypt with password 123
-    // .then(aes4js.decrypt.bind(this, "123")) // decrypt
-        .then(x => {
+    return aes4js.encrypt(key, password)
+        .then((x) => {
+            alert('test');
             return JSON.stringify(x.encrypted);
-        });
-
+        },
+            (failure) => {
+            alert(failure)
+            });
 }
 
 function decodePassword(key, cipher) {
@@ -151,7 +152,18 @@ function register() {
         i_pwd.value = x;
         document.getElementById("register_form").submit();
     });
+}
 
+    function addPassword() {
+        i_pwd = document.getElementById("i_pwd");
+
+        key = window.localStorage.getItem("cypher_key")
+
+        encoded_password = encodePassword(key, i_pwd)
+            .then((x) => {
+                i_pwd.value = x;
+                alert(x);
+            });
 
 
 }

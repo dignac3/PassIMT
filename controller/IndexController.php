@@ -1,6 +1,5 @@
 <?php
 
-
 include dirname(__FILE__).'/../model/services/UserService.php';
 include dirname(__FILE__).'/../model/services/PasswordService.php';
 include dirname(__FILE__).'/../model/connection.php';
@@ -92,6 +91,14 @@ class IndexController
         return $template->render();
     }
 
+    public function getPasswordForm() {
+        $template = $this->templater->load("add_password.html");
+        return $template->render();
+    }
+
+    public function postPassword($request) {
+        echo json_encode($request->getBody());
+    }
 }
 
 ?>

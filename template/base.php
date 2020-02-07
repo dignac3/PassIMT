@@ -1,8 +1,6 @@
 <!doctype html>
 {% block head %}
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"

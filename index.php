@@ -46,6 +46,18 @@ $router->get('/passwords', function () {
     return $indexController->getPasswordList();
 });
 
+$router->get('/passwords/new', function () {
+    global $indexController;
+
+    return $indexController->getPasswordForm();
+});
+
+$router->post('/addPassword', function ($request) {
+    global $indexController;
+
+    return $indexController->postPassword($request);
+});
+
 $router->post('/register',function ($request){
     global $indexController;
 
@@ -66,6 +78,5 @@ $router->post('/login',function ($request){
 
     return $indexController->postLogin($request->getBody());
 });
-
 
 ?>
