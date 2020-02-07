@@ -1,5 +1,6 @@
 <?php
 
+
 include dirname(__FILE__).'/../model/services/UserService.php';
 include dirname(__FILE__).'/../model/services/PasswordService.php';
 include dirname(__FILE__).'/../model/connection.php';
@@ -28,7 +29,7 @@ class IndexController
     public function getIndex()
     {
 
-        $template = $this->templater->load("index.html");
+        $template = $this->templater->load("index.php");
 
         return $template->render();
     }
@@ -36,7 +37,7 @@ class IndexController
     public function getLogin()
     {
 
-        $template = $this->templater->load("login.html");
+        $template = $this->templater->load("login.php");
 
         return $template->render();
     }
@@ -49,20 +50,23 @@ class IndexController
 
         if ($granted) {
             $connected = $this->userService->updateUUID($uuid, $request['i_email']);
+
+            $_SESSION["session_id"] = $uuid;
         }
 
+
         if ($connected) {
-            $this->templater->addGlobal('session_id', $uuid);
-            $template = $this->templater->load("index.html");
+            $this->templater->addGlobal('session', $_SESSION);
+            $template = $this->templater->load("index.php");
             return $template->render(['connected' => $connected]);
         } else {
-            $template = $this->templater->load("login.html");
+            $template = $this->templater->load("login.php");
             return $template->render(['connected' => false]);
         }
     }
 
     public function getRegister() {
-        $template = $this->templater->load("register.html");
+        $template = $this->templater->load("register.php");
 
         return $template->render();
 
@@ -73,13 +77,19 @@ class IndexController
         $created = $this->userService->register($request['i_email'], $request['i_pwd']);
 
         if ($created) {
-            $template = $this->templater->load("login.html");
+            $template = $this->templater->load("login.php");
             return $template->render(['created' => $created]);
         } else {
-            $template = $this->templater->load("register.html");
+            $template = $this->templater->load("register.php");
             return $template->render(['error' => true]);
         }
 
+    }
+
+    public function getPasswordList()
+    {
+        $template = $this->templater->load("list_passwords.php");
+        return $template->render();
     }
 
 }

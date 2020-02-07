@@ -1,6 +1,8 @@
 <!doctype html>
 {% block head %}
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -19,14 +21,14 @@
         <ul class="nav navbar-nav">
             {% block menu_list %}
                 <li><a href="/index">Accueil</a></li>
-                {% if session_id is not null %}
+            {% if session.session_id is not null %}
                     <li><a href="/passwords">Mots de passe</a></li>
                     <li><a href="/passwords/new">Ajouter un mot de passe</a></li>
                 {% endif %}
             {% endblock %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            {% if session_id is null %}
+            {% if session.session_id is null %}
                 <li><a href="/register"><span class="glyphicon glyphicon-user"></span> S'enregistrer</a></li>
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
             {% else %}

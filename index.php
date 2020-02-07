@@ -8,8 +8,13 @@ include_once 'router/Router.php';
 include_once 'controller/IndexController.php';
 require_once 'vendor/autoload.php';
 
+session_start();
+
 $loader = new FilesystemLoader('template');
+
 $templater = new Environment($loader,[]);
+$templater->addGlobal("session", $_SESSION);
+
 
 $indexController = new IndexController($templater);
 
@@ -35,6 +40,12 @@ $router->get('/register',function (){
     return $indexController->getRegister();
 });
 
+$router->get('/passwords', function () {
+    global $indexController;
+
+    return $indexController->getPasswordList();
+});
+
 $router->post('/register',function ($request){
     global $indexController;
 
@@ -55,5 +66,6 @@ $router->post('/login',function ($request){
 
     return $indexController->postLogin($request->getBody());
 });
+
 
 ?>

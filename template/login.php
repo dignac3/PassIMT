@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "base.php" %}
 
 {% block title %}Connexion{% endblock %}
 
 {% block content %}
 
-    {% if session_id is not null %}
+{% if session.session_id is not null %}
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <p class="alert alert-success"> vous êtes déjà connecté </p>
