@@ -124,14 +124,9 @@ function register() {
     hashed = generateHashSaltedPassword(i_pwd.value);
 
     hashed.then((x) => {
-
         i_pwd.value = x;
     });
 
-    //
-    //
-    //
-    //
 
 
 }
