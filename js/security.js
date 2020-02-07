@@ -121,7 +121,7 @@ function connection() {
     hashed.then((x) => {
 
         i_pwd.value = x;
-        alert("pass : " + x);
+        // alert("pass : " + x);
 
     });
 
@@ -130,7 +130,7 @@ function connection() {
     generateCypherKey(encrypt_salt, pwd_salted)
         .then(x => {
             window.localStorage.setItem('cypher_key', x);
-            alert("key : " + x);
+            // alert("key : " + x);
         });
 
 
