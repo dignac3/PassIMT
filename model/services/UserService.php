@@ -31,4 +31,28 @@ class UserService
 
         return $data;
     }
+
+    public function login($mail, $master_password)
+    {
+        $stmt = $this->mysqli->prepare("SELECT COUNT(1) AS authenticated FROM users WHERE mail = ? AND master_password = ?");
+        $stmt->bind_param('ss', $mail, $master_password);
+        if (!$stmt->execute()) {
+            echo "Request failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
+        }
+
+        $data = $stmt->get_result();
+
+        return $data->fetch_assoc();
+    }
+
+    public function updateUUID($uuid, $mail) {
+        $stmt = $this->mysqli->prepare("UPDATE users SET uuid = ? WHERE mail = ?");
+        $stmt->bind_param('ss', $uuid, $mail);
+
+        if (!($data = $stmt->execute())) {
+            echo "Request failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
+        }
+
+        return $data;
+    }
 }

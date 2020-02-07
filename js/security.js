@@ -119,10 +119,8 @@ function connection() {
     hashed = generateHashSaltedPassword(i_pwd.value);
 
     hashed.then((x) => {
-
         i_pwd.value = x;
-        // alert("pass : " + x);
-
+        document.getElementById("login_form").submit();
     });
 
     encrypt_salt = window.localStorage.getItem("encrypt_salt");

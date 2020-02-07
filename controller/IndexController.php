@@ -8,6 +8,8 @@ class IndexController
 {
 
     private $mysqli;
+    private $userService;
+    private $passwordService;
     private $templater;
 
     /**
@@ -18,6 +20,8 @@ class IndexController
     {
         $this->templater = $templater;
         $this->mysqli = getConnection();
+        $this->userService = new UserService($this->mysqli);
+        $this->passwordService = new PasswordService($this->mysqli);
     }
 
 
@@ -37,6 +41,26 @@ class IndexController
         return $template->render();
     }
 
+    public function postLogin($request) {
+        $connected = 0;
+        $uuid = bin2hex(random_bytes(16));
+        $data  = $this->userService->login($request['i_email'], $request['i_pwd']);
+        $granted = $data['authenticated'];
+
+        if ($granted) {
+            $connected = $this->userService->updateUUID($uuid, $request['i_email']);
+        }
+
+        if ($connected) {
+            $this->templater->addGlobal('session_id', $uuid);
+            $template = $this->templater->load("index.html");
+            return $template->render(['connected' => $connected]);
+        } else {
+            $template = $this->templater->load("login.html");
+            return $template->render(['connected' => false]);
+        }
+    }
+
     public function getRegister() {
         $template = $this->templater->load("register.html");
 
@@ -46,8 +70,7 @@ class IndexController
 
     public function postRegister($request)
     {
-        $userService = new UserService($this->mysqli);
-        $created = $userService->register($request['i_email'], $request['i_pwd']);
+        $created = $this->userService->register($request['i_email'], $request['i_pwd']);
 
         if ($created) {
             $template = $this->templater->load("login.html");
