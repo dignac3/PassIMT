@@ -80,6 +80,10 @@ async function digestMessage(message) {
 
 function generateCypherKey(salt, pwd) {
 
+    pwd_salted = salt + pwd;
+
+    return digestMessage(pwd_salted);
+
 }
 
 function generateHashSaltedPassword(pwd) {
@@ -95,26 +99,48 @@ function generateHashSaltedPassword(pwd) {
     return digestMessage(pwd_salted);
 }
 
-function encode(key, password) {
+function encodePassword(key, password) {
 
-    aes4js.encrypt("123", "hello world") // encrypt with password 123
+    aes4js.encrypt(key, password) // encrypt with password 123
     // .then(aes4js.decrypt.bind(this, "123")) // decrypt
-        .then(x => JSON.stringify(x.encrypted))
-        .then(alert);
+        .then(x => {
+            return JSON.stringify(x.encrypted);
+        });
 
 }
 
-function decode(key, cipher) {
+function decodePassword(key, cipher) {
     aes4js.decrypt(key.value, cipher.value).then(x => output.value = x);
 }
 
+function connection() {
+    i_pwd = document.getElementById("i_pwd");
+
+    hashed = generateHashSaltedPassword(i_pwd.value);
+
+    hashed.then((x) => {
+
+        i_pwd.value = x;
+        alert("pass : " + x);
+
+    });
+
+    encrypt_salt = window.localStorage.getItem("encrypt_salt");
+
+    generateCypherKey(encrypt_salt, pwd_salted)
+        .then(x => {
+            window.localStorage.setItem('cypher_key', x);
+            alert("key : " + x);
+        });
+
+
+}
 
 function register() {
     i_pwd = document.getElementById("i_pwd");
-    i_salt = document.getElementById("i_salt_passwords")
 
     salt = "123";
-    i_salt.value = salt;
+    window.localStorage.setItem("encrypt_salt", salt);
     // A LA CONNEXION
 
     //key = generateCypherKey(salt,i_pwd.value);
