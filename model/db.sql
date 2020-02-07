@@ -2,6 +2,7 @@ CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
   mail TEXT NOT NULL,
   master_password TEXT NOT NULL,
+  uuid TEXT,
   PRIMARY KEY (id)
 );
 

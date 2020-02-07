@@ -53,6 +53,7 @@ $router->get('/login',function (){
 $router->post('/login',function ($request){
     global $indexController;
 
+    return $indexController->postLogin($request->getBody());
 });
 
 ?>
