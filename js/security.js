@@ -70,11 +70,32 @@
 })
 
 
-function generateKey(salt, pwd) {
+async function digestMessage(message) {
+    const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);           // hash the message
+    const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+    return hashHex;
+}
+
+function generateCypherKey(salt, pwd) {
 
 }
 
-function encode5(key, password) {
+function generateHashSaltedPassword(pwd) {
+
+    if (window.localStorage.getItem('auth_salt') === undefined) {
+        window.localStorage.setItem('auth_salt', '123');
+    }
+
+    salt = window.localStorage.getItem('auth_salt');
+
+    pwd_salted = salt + pwd;
+
+    return digestMessage(pwd_salted);
+}
+
+function encode(key, password) {
 
     aes4js.encrypt("123", "hello world") // encrypt with password 123
     // .then(aes4js.decrypt.bind(this, "123")) // decrypt
@@ -87,3 +108,31 @@ function decode(key, cipher) {
     aes4js.decrypt(key.value, cipher.value).then(x => output.value = x);
 }
 
+
+function register() {
+    i_pwd = document.getElementById("i_pwd");
+    i_salt = document.getElementById("i_salt_passwords")
+
+    salt = "123";
+    i_salt.value = salt;
+    // A LA CONNEXION
+
+    //key = generateCypherKey(salt,i_pwd.value);
+
+    // --> Stocker clé dans  qqpart
+
+    hashed = generateHashSaltedPassword(i_pwd.value);
+
+    hashed.then((x) => {
+
+        i_pwd.value = x;
+        document.getElementById("register_form").submit();
+    });
+
+    //
+    //
+    //
+    //
+
+
+}
