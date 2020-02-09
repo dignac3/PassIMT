@@ -79,4 +79,11 @@ $router->post('/login',function ($request){
     return $indexController->postLogin($request->getBody());
 });
 
+$router->get('/logout',function (){
+    session_destroy();
+    global $indexController;
+
+    return $indexController->getIndex();
+});
+
 ?>
