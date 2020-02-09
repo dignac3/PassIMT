@@ -21,6 +21,19 @@ class UserService
         return $data;
     }
 
+    public function getUserByMail($mail) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE mail = ?");
+        $stmt->bind_param('s', $mail);
+
+        if (!$stmt->execute()) {
+            echo "Request failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
+        }
+
+        $data = $stmt->get_result();
+
+        return $data->fetch_object();
+    }
+
     public function getUserIdByUUID($uuid)
     {
         $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE uuid = ?");
