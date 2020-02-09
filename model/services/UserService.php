@@ -21,6 +21,20 @@ class UserService
         return $data;
     }
 
+    public function getUserIdByUUID($uuid)
+    {
+        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE uuid = ?");
+        $stmt->bind_param('s', $uuid);
+
+        if (!$stmt->execute()) {
+            echo "Request failed: (" . $this->mysqli->errno . ") " . $this->mysqli->error;
+        }
+
+        $data = $stmt->get_result();
+
+        return $data->fetch_object();
+    }
+
     public function register($mail, $master_password) {
         $stmt = $this->mysqli->prepare("INSERT INTO users (mail, master_password) VALUES (?, ?)");
         $stmt->bind_param('ss', $mail, $master_password);

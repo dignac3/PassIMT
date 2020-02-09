@@ -87,7 +87,10 @@ class IndexController
 
     public function getPasswordList()
     {
-        $passwords = $this->passwordService->getPasswords(1);
+        $uuid = $_SESSION["session_id"];
+        $user = $this->userService->getUserIdByUUID($uuid);
+
+        $passwords = $this->passwordService->getPasswords($user->id);
         $template = $this->templater->load("list_passwords.php");
         return $template->render(['passwords' => $passwords]);
     }
@@ -97,10 +100,14 @@ class IndexController
         return $template->render();
     }
 
-    public function postPassword($request) {
-        $this->passwordService->createPassword(1, $_POST['i_label'], $_POST['i_login'], $_POST['i_password']);
-        $template = $this->templater->load("index.php");
-        return $template->render();
+    public function postCreatePassword($request)
+    {
+
+        $uuid = $_SESSION["session_id"];
+        $user = $this->userService->getUserIdByUUID($uuid);
+
+        $this->passwordService->createPassword($user->id, $_POST['i_label'], $_POST['i_login'], $_POST['i_password']);
+        return $this->getPasswordList();
     }
 }
 

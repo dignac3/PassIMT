@@ -55,7 +55,7 @@ $router->get('/passwords/new', function () {
 $router->post('/passwords/new', function ($request) {
     global $indexController;
 
-    return $indexController->postPassword($request);
+    return $indexController->postCreatePassword($request);
 });
 
 $router->post('/register',function ($request){

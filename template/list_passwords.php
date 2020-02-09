@@ -19,11 +19,27 @@
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         {% if passwords is defined %}
-        {% for p in passwords %}
-        <h1> {{ p.label }} </h1>
-
-        <button onclick="decodePassword('{{p.password}}')">  {{ p.login }} </button>
-        {% endfor %}
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Nom d'utilisateur</th>
+                <th>Mot de passe</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in passwords %}
+            <tr>
+                <td>{{ p.label }}</td>
+                <td>{{ p.login }}</td>
+                <td class=" text-center">
+                    <button class="glyphicon glyphicon-open btn btn-success"
+                            onclick="decodePassword('{{p.password}}')"></button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
         {% endif %}
     </div>
 </div>
