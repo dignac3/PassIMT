@@ -133,7 +133,7 @@ function connection(login_challenge) {
     hashed.then((x) => {
         i_pwd.value = x;
 
-        digestMessage(login_challenge + x).then(w => {
+        digestMessage("" + login_challenge + x).then(w => {
             document.getElementById("challenge").value = w;
             document.getElementById("login_form").submit();
         });
