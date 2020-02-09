@@ -38,6 +38,8 @@ class IndexController
 
         $template = $this->templater->load("login.php");
 
+        $_SESSION["login_challenge"] = random_bytes("16");
+
         return $template->render();
     }
 

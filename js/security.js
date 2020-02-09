@@ -125,15 +125,21 @@ function decodePassword(cypher) {
         });
 }
 
-function connection() {
+function connection(login_challenge) {
     i_pwd = document.getElementById("i_pwd");
 
     hashed = generateHashSaltedPassword(i_pwd.value);
 
     hashed.then((x) => {
         i_pwd.value = x;
-        document.getElementById("login_form").submit();
+
+        digestMessage(login_challenge + x).then(w => {
+            document.getElementById("challenge").value = w;
+            document.getElementById("login_form").submit();
+        });
+
     });
+
 
     encrypt_salt = window.localStorage.getItem("encrypt_salt");
 

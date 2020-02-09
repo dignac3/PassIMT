@@ -42,7 +42,10 @@
                     <label for="i_pwd">Mot de Passe:</label>
                     <input type="password" class="form-control" name="i_pwd" id="i_pwd" required>
                 </div>
-                <button type="submit" class="btn btn-default" onclick="connection()">Se Connecter</button>
+                <input type="hidden" name="challenge" id="challenge"></input>
+                <button type="submit" class="btn btn-default" onclick="connection({{ session.login_challenge }})">Se
+                    Connecter
+                </button>
             </form>
 
         </div>
