@@ -87,8 +87,9 @@ class IndexController
 
     public function getPasswordList()
     {
+        $passwords = $this->passwordService->getPasswords(1);
         $template = $this->templater->load("list_passwords.php");
-        return $template->render();
+        return $template->render(['passwords' => $passwords]);
     }
 
     public function getPasswordForm() {
@@ -97,8 +98,9 @@ class IndexController
     }
 
     public function postPassword($request) {
-        $created = $this->passwordService->createPassword(1, $_POST['i_label'], $_POST['i_login'], $_POST['i_password']);
-        echo $created;
+        $this->passwordService->createPassword(1, $_POST['i_label'], $_POST['i_login'], $_POST['i_password']);
+        $template = $this->templater->load("index.php");
+        return $template->render();
     }
 }
 

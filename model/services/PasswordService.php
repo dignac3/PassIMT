@@ -31,7 +31,12 @@ class PasswordService
 
         $data = $stmt->get_result();
 
-        return $data;
+        $results = [];
+        while ($obj = $data->fetch_assoc()) {
+            $results[] = $obj;
+        }
+
+        return $results;
     }
 
 }

@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<script src="{{ '../js/security.js' }}"></script>
 
 {% if session.session_id is null %}
 <div class="row">
@@ -17,8 +18,13 @@
 </div>
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
+        {% if passwords is defined %}
+        {% for p in passwords %}
+        <h1> {{ p.label }} </h1>
 
-
+        <button onclick="decodePassword('{{p.password}}')">  {{ p.login }} </button>
+        {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endif %}

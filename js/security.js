@@ -107,7 +107,7 @@ function encodePassword() {
 
     aes4js.encrypt(key, password)
         .then((x) => {
-                i_password.value = x.encrypted;
+                i_password.value = JSON.stringify(x);
                 document.getElementById("password_form").submit();
             },
             (failure) => {
@@ -115,8 +115,14 @@ function encodePassword() {
             });
 }
 
-function decodePassword(key, cipher) {
-    aes4js.decrypt(key.value, cipher.value).then(x => output.value = x);
+function decodePassword(cypher) {
+    key = window.localStorage.getItem("cypher_key");
+    cypher = cypher.replace(/(&quot\;)/g,"\"");
+    aes4js.decrypt(key, cypher)
+        .then((x) => {
+            alert(x);
+            return x;
+        });
 }
 
 function connection() {
