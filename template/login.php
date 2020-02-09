@@ -43,7 +43,7 @@
                     <input type="password" class="form-control" name="i_pwd" id="i_pwd" required>
                 </div>
                 <input type="hidden" name="challenge" id="challenge"></input>
-                <button type="submit" class="btn btn-default" onclick="connection({{ session.login_challenge }})">Se
+                <button type="submit" class="btn btn-default" onclick="connection('{{session.login_challenge}}')">Se
                     Connecter
                 </button>
             </form>

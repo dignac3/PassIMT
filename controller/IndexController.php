@@ -35,10 +35,7 @@ class IndexController
 
     public function getLogin()
     {
-
         $template = $this->templater->load("login.php");
-
-        $_SESSION["login_challenge"] = random_bytes("16");
 
         return $template->render();
     }
@@ -47,26 +44,24 @@ class IndexController
         $connected = 0;
         $uuid = bin2hex(random_bytes(16));
         $challenge = $request["challenge"];
-        echo $challenge;
-        echo " | ";
 
-        #TODO : change if user not existing
-        $stored_password = $this->userService->getUserByMail($request['i_email'])->master_password;
-        $salted_password = $_SESSION['login_challenge'] . $stored_password;
+        $user = $this->userService->getUserByMail($request['i_email']);
+        if (!$user) {
+            $granted = 0;
+            return;
+        }
+        $stored_password = $user->master_password;
+        $salted_password = $_SESSION["login_challenge"] . $stored_password;
 
         $server_challenge = hash("sha256", $salted_password);
-        echo $server_challenge;
-        exit;
 
-        $data  = $this->userService->login($request['i_email'], $request['i_pwd']);
-        $granted = $data['authenticated'];
+        $challenge == $server_challenge ? $granted = 1 : $granted = 0;
 
         if ($granted) {
             $connected = $this->userService->updateUUID($uuid, $request['i_email']);
 
             $_SESSION["session_id"] = $uuid;
         }
-
 
         if ($connected) {
             $this->templater->addGlobal('session', $_SESSION);

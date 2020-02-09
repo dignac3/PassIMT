@@ -13,8 +13,12 @@ session_start();
 $loader = new FilesystemLoader('template');
 
 $templater = new Environment($loader,[]);
-$templater->addGlobal("session", $_SESSION);
 
+if (!isset($_SESSION["login_challenge"])) {
+    $_SESSION["login_challenge"] = bin2hex(random_bytes(16));
+}
+
+$templater->addGlobal("session", $_SESSION);
 
 $indexController = new IndexController($templater);
 
