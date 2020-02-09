@@ -9,7 +9,7 @@ effectuer les commande avec composer (gestionnaire de dépendance php) :
 
 ### base de données MYSQL
 * Le fichier de configuration se situe dans `model/connection.php` 
-* Le script de création de table se situé dans `model/dg.sql`
+* Le script de création de table se situé dans `model/db.sql`
 
 
 ## Démarrage
