@@ -52,7 +52,7 @@ $router->get('/passwords/new', function () {
     return $indexController->getPasswordForm();
 });
 
-$router->post('/addPassword', function ($request) {
+$router->post('/passwords/new', function ($request) {
     global $indexController;
 
     return $indexController->postPassword($request);

@@ -29,11 +29,11 @@
                 <form action="/register" method="post" id="register_form">
                     <div class="form-group">
                         <label for="i_email">Email:</label>
-                        <input type="email" class="form-control" name="i_email" id="i_email">
+                        <input type="email" class="form-control" name="i_email" id="i_email" required>
                     </div>
                     <div class="form-group">
                         <label for="i_pwd">Mot de Passe:</label>
-                        <input type="password" class="form-control" name="i_pwd" id="i_pwd">
+                        <input type="password" class="form-control" name="i_pwd" id="i_pwd" required>
                     </div>
                     <button type="submit" class="btn btn-default" onclick="register()">S'enregistrer</button>
                 </form>

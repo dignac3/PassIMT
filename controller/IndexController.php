@@ -97,7 +97,8 @@ class IndexController
     }
 
     public function postPassword($request) {
-        echo json_encode($request->getBody());
+        $created = $this->passwordService->createPassword(1, $_POST['i_label'], $_POST['i_login'], $_POST['i_password']);
+        echo $created;
     }
 }
 

@@ -99,14 +99,19 @@ function generateHashSaltedPassword(pwd) {
     return digestMessage(pwd_salted);
 }
 
-function encodePassword(key, password) {
-    return aes4js.encrypt(key, password)
+function encodePassword() {
+    i_password = document.getElementById("i_password");
+    password = i_password.value;
+
+    key = window.localStorage.getItem("cypher_key");
+
+    aes4js.encrypt(key, password)
         .then((x) => {
-            alert('test');
-            return JSON.stringify(x.encrypted);
-        },
+                i_password.value = x.encrypted;
+                document.getElementById("password_form").submit();
+            },
             (failure) => {
-            alert(failure)
+                alert(failure)
             });
 }
 
@@ -152,18 +157,4 @@ function register() {
         i_pwd.value = x;
         document.getElementById("register_form").submit();
     });
-}
-
-    function addPassword() {
-        i_pwd = document.getElementById("i_pwd");
-
-        key = window.localStorage.getItem("cypher_key")
-
-        encoded_password = encodePassword(key, i_pwd)
-            .then((x) => {
-                i_pwd.value = x;
-                alert(x);
-            });
-
-
 }
