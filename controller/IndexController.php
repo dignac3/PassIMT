@@ -46,6 +46,10 @@ class IndexController
     public function postLogin($request) {
         $connected = 0;
         $uuid = bin2hex(random_bytes(16));
+        $challenge = $request["challenge"];
+        // générer challenge coté serveur avec user
+        //comparer
+
         $data  = $this->userService->login($request['i_email'], $request['i_pwd']);
         $granted = $data['authenticated'];
 
